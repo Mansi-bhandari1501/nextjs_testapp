@@ -1,17 +1,23 @@
-import { errorHandler } from "../lib/utils.js";
-import { examService } from "../service/exam.service.js";
-const addExam = async (req,res) => {
+// import { errorHandler } from "../lib/utils.js";
+// import { bookService } from "../service/book.service.js";
+// const {bookService} =require('../service/')
+const {errorHandler} = require('../lib/utils.js');
+const {booksService} = require('../service/index.js');
+
+exports.addBook = async (req,res) => {
+    // console.log(req,"REQUEST DATA")
     try{
-        const response = await examService.addExam(req);
+        const response = await booksService.addNewBook(req);
         console.log("response",response)
         return res.status(201).send({
             success:true,
-            message: 'Exam added succefully',
-            Exam: response
+            message: 'Book added successfully',
+            Books: response
         })
     }
     catch(error)
     {
+        console.log('error: ', error);
         errorHandler(res,error);
     }
 }
@@ -21,7 +27,7 @@ const getAllExams = async (req,res) => {
         console.log("response",response)
         return res.status(200).send({
             success:true,
-            message: 'Exam Fetched succefully',
+            message: 'Book Fetched successfully',
             Exam: response
         })
     }
@@ -78,12 +84,12 @@ const editExam = async (req,res) => {
   }
 }
 
-const examController = {
-    addExam,
-    getExam,
-    deleteExam,
-    getAllExams,
-    editExam,
-}
+// const examController = {
+//     addExam,
+//     getExam,
+//     deleteExam,
+//     getAllExams,
+//     editExam,
+// }
 
-export default examController;
+// export default examController;

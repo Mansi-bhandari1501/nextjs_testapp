@@ -135,6 +135,6 @@ const port  = process.env.PORT
 // })
 app.listen({ port }, async () => {
     console.log("server running pon port",port)
-    await sequelize.sync()
+    // await sequelize.sync()
     console.log("Database connected!")
 })

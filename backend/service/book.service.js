@@ -1,36 +1,40 @@
-import { examModel } from "../model/exam.model.js"
-import { userModel } from "../model/user.model.js"
+const {User}= require("../models");
+const {Books}= require("../models");
 
-const addExam = async(req) => {
+exports.addNewBook = async(req) => {
     try{
-      console.log("id",req.user._id)
+      // console.log("Request",req.body)
+      const user = await User.findOne({
+        _id: req.body.userId
+      })
+      console.log('user😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁: ', user);
+      if(user.role === 'admin'){
 
-      const  {name,duration,category,totalMarks,passingMarks} = req.body
-       const user = await userModel.findOne({
-         _id: req.user._id
-       })
-       console.log(user)
-       if(user.role === 'admin'){
-         const examExists = await examModel.findOne({name:name})
-         if(examExists){
+      const  {title,category,stock,description} = req.body
+      
+         const bookExists = await Books.findOne({where:{title:title}})
+         console.log(bookExists,"jgsfusugufgsud")
+         if(bookExists){
           throw Object.assign(new Error(), {
             name: "CONFLICT",
-            message: "Exam Already exists",
+            message: "Book Already exists",
           });
          }
          else{
-             req.body.questions = []
-             const newExam = await examModel.create({name,duration,category,totalMarks,passingMarks})
-             console.log("exammmmm",newExam)
-             return newExam
+      
+             const newBook = await Books.create({title,stock,category,description})
+             console.log("bookss",newBook)
+             return newBook
          }
-       }
+        }
+    // return newBook;
     }
     catch(error){
+      // console.log(error)
       throw(error)
     }
  }
- const getAllExams = async(req) => {
+exports.getAllExams = async(req) => {
     try{
        const exam = await examModel.find()
        if(exam){
@@ -50,7 +54,7 @@ const addExam = async(req) => {
     }
   }
   
-  const getExamById = async(req,res) => {
+  exports.getExamById = async(req,res) => {
     try{
        const exam = await examModel.findById(req.params.id).populate('questions');
        if(exam){
@@ -69,7 +73,7 @@ const addExam = async(req) => {
   }
   
   // edit exam by id
-  const editExam = async(req,res) => {
+  exports.editExam = async(req,res) => {
     try{
        const user = await userModel.findOne({_id: req.user._id})
        if(user.role === "admin"){
@@ -103,7 +107,7 @@ const addExam = async(req) => {
     }
   }
   
-  const deleteExam = async(req) => {
+  exports.deleteExam = async(req) => {
     try{
       console.log("params",req.params.id)
        const user = await userModel.findOne({_id: req.user._id})
@@ -136,12 +140,12 @@ const addExam = async(req) => {
   
   
   
-export const examService = {
-    addExam,
-    getAllExams,
-    getExamById,
-    deleteExam,
-    editExam,
-};
+// export const examService = {
+//     addExam,
+//     getAllExams,
+//     getExamById,
+//     deleteExam,
+//     editExam,
+// };
 
   

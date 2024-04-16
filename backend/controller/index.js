@@ -8,5 +8,6 @@
 // }
 
 module.exports = {
-    userController: require("./user.controller.js")
+    userController: require("./user.controller.js"),
+    bookController: require("./books.controller.js")
 }
