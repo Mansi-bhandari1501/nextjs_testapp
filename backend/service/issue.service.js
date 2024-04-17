@@ -156,7 +156,7 @@ console.log(user,"-------------------")
   }
 }
 exports.acceptIssue = async (req) => {
-  console.log('reqBODYY: ', req.body);
+  console.log('req: ', req.body);
   try {
 
     const user = await User.findOne({ where: { userId: req.body.userId } })
