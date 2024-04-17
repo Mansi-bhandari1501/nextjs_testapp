@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate({Issue}) {
       // define association here
       this.hasMany(Issue, {foreignKey: 'bookId'})
-
     }
   }
   Books.init({

@@ -3,14 +3,14 @@ const {Books}= require("../models");
 
 exports.addNewBook = async(req) => {
     try{
-      // console.log("Request",req.body)
+      console.log("Request",req.body)
       const user = await User.findOne({
-        _id: req.body.userId
+        uuId: req.body.uuId
       })
-      console.log('user😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁: ', user);
+      console.log('user: ', user);
       if(user.role === 'admin'){
 
-      const  {title,category,stock,description} = req.body
+      const  {title,category,stock,descriptions,author} = req.body
       
          const bookExists = await Books.findOne({where:{title:title}})
          console.log(bookExists,"jgsfusugufgsud")
@@ -22,7 +22,7 @@ exports.addNewBook = async(req) => {
          }
          else{
       
-             const newBook = await Books.create({title,stock,category,description})
+             const newBook = await Books.create({title,stock,category,descriptions,author})
              console.log("bookss",newBook)
              return newBook
          }
@@ -34,64 +34,69 @@ exports.addNewBook = async(req) => {
       throw(error)
     }
  }
-exports.getAllExams = async(req) => {
+exports.getAllBooks = async(req) => {
     try{
-       const exam = await examModel.find()
-       if(exam){
-        return exam
+       const Book = await Books.findAll({})
+       
+       if(Book){
+        return Book
        }
        else{
         throw Object.assign(new Error(), {
           name: "CONFLICT",
-          message: "No exam is present",
+          message: "No Book is present",
         });
         
     }
   }
     catch(error){
+      console.log('error: ', error);
       throw(error)
- 
     }
   }
   
-  exports.getExamById = async(req,res) => {
+  exports.getBookById = async(req) => {
     try{
-       const exam = await examModel.findById(req.params.id).populate('questions');
-       if(exam){
-        return exam
+       const Book = await Books.findOne({where:{bookId:req.params.id}})
+       if(Book){
+        return Book
        }
        else{
         throw Object.assign(new Error(), {
           name: "BAD_REQUEST",
-          message: "No exam is present",
+          message: "No Book is present",
         });
        }
     }
     catch(error){
+      console.log('error: ', error);
       throw(error)
     }
   }
   
   // edit exam by id
-  exports.editExam = async(req,res) => {
+  exports.editBook = async(req) => {
     try{
-       const user = await userModel.findOne({_id: req.user._id})
+       const user = await User.findOne({where:{userId: req.body.userid}})
        if(user.role === "admin"){
-        const exam = await examModel.findOne({_id: req.params.id})
-        if(exam){
-          exam.name = req.body.name;
-          exam.duration = req.body.duration;
-          exam.category = req.body.category;
-          exam.totalMarks = req.body.totalMarks;
-          exam.passingMarks = req.body.passingMarks;
-          exam.instructions
-          exam.save()
-         return exam
+        const Book = await Books.findOne({bookId: req.params.id})
+        if(Book){
+          // Book.title = req.body.title;
+          // Book.author = req.body.author;
+          // Book.category = req.body.category;
+          // Book.descriptions = req.body.descriptions;
+          // Book.stock = req.body.stock;
+          // Book.save()
+          const updatedBook = Books.update(
+            req.body ,
+            { where: { bookId: req.params.id } }
+          )
+         return Book
         }
         else{
           throw Object.assign(new Error(), {
             name: "BAD_REQUEST",
-            message: "No exam is present",
+            message: "No Book is present",
           });
         }
        }
@@ -107,33 +112,34 @@ exports.getAllExams = async(req) => {
     }
   }
   
-  exports.deleteExam = async(req) => {
+  exports.deleteBook = async(req) => {
     try{
       console.log("params",req.params.id)
-       const user = await userModel.findOne({_id: req.user._id})
+       const user = await User.findOne({where:{userId: req.body.userId}})
        if(user.role === "admin"){
-        console.log("uesr is admin")
-        const exam = await examModel.findOneAndDelete({_id: req.params.id})
-        console.log(exam)
-        if(exam){
-          exam.delete()
-         return exam
+        console.log("user is admin")
+        const Book = await Books.findOne({where:{bookId: req.params.id}})
+        console.log(Book)
+        if(Book){
+         await Book.destroy()
+         return Book
         }
         else{
           throw Object.assign(new Error(), {
             name: "BAD_REQUEST",
-            message: "exam doesnot exist",
+            message: "Book doesnot exist",
           });
         }
        }
        else{
         throw Object.assign(new Error(), {
           name: "BAD_REQUEST",
-          message: "Cannot delete exam ",
+          message: "Cannot delete Book ",
         });
        }
     }
     catch(error){
+      console.log('error: ', error);
      throw(error)
     }
   }

@@ -7,7 +7,10 @@ const { bookController } = require('../controller/index.js');
 
 
 router.post("/", bookController.addBook);
-// router.get("/", bookController.loginController);
+router.get("/", bookController.getBooks);
+router.get("/:id", bookController.getBook);
+router.put("/:id", bookController.editBook);
+router.delete("/:id", bookController.deleteBook);
 
 
 

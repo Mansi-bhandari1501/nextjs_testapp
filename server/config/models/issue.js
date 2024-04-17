@@ -9,26 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static userAssociation;
-    static associate(models) {
+    static associate(model) {
       // define association here
-      this.userAssociation = Issue.belongsTo(models.User,{
+      Issue.belongsTo(model.User,{
         foreignKey:"userId",
-        // as: 'user'
-      })
-      Issue.belongsTo(models.Books,{
-        foreignKey:"bookId",
-        as: 'book'
+        as: 'user'
       })
     }
-    }
-  
+  }
   Issue.init({
     userId:{
-      type:DataTypes.INTEGER,
+      type:DataTypes.UUID,
       allowNull:false,
       references:{
-        model:'User',
+        model:'Users',
         key:'id'
       } 
     },
@@ -37,25 +31,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
+    // userId: {
+    //   type: DataTypes.UUID,
+    //   allowNull: false
+    // },
     bookId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references:{
-        model:'Books',
-        key:'id'
-      } 
+      type: DataTypes.UUID,
+      allowNull: false
     },
+    // bookId: DataTypes.STRING,
     issueDate: DataTypes.DATE,
-    dueDate: {
-      type:DataTypes.DATE,
-    }
-    ,
-    returnDate: DataTypes.DATE,
-    status:{
-      type: DataTypes.ENUM('issued', 'returned',"pending"),
-      allowNull: true,
-      defaultValue:"pending" ,
-    }
+    dueDate: DataTypes.DATE,
+    returnDate: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Issue',

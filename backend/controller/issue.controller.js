@@ -2,17 +2,17 @@
 // import { bookService } from "../service/book.service.js";
 // const {bookService} =require('../service/')
 const {errorHandler} = require('../lib/utils.js');
-const {booksService} = require('../service/index.js');
+const {issueService} = require('../service/index.js');
 
-exports.addBook = async (req,res) => {
+exports.IssueBook = async (req,res) => {
     // console.log(req,"REQUEST DATA")
     try{
-        const response = await booksService.addNewBook(req);
+        const response = await issueService.addNewIssue(req);
         console.log("response",response)
         return res.status(201).send({
             success:true,
-            message: 'Book added successfully',
-            Books: response
+            message: 'IssueBook added successfully',
+            Issue: response
         })
     }
     catch(error)
@@ -21,14 +21,14 @@ exports.addBook = async (req,res) => {
         errorHandler(res,error);
     }
 }
-exports.getBooks = async (req,res) => {
+exports.getIssues = async (req,res) => {
     try{
-        const response = await booksService.getAllBooks(req);
+        const response = await issueService.getAllIssue(req);
         console.log("response",response)
         return res.status(200).send({
             success:true,
-            message: 'Book Fetched successfully',
-            Books: response
+            message: 'Issue Fetched successfully',
+            Issue: response
         })
     }
     catch(error)
@@ -39,12 +39,12 @@ exports.getBooks = async (req,res) => {
 }
 exports.deleteBook = async (req,res) => {
     try{
-        const response = await booksService.deleteBook(req);
+        const response = await issueService.deleteIssue(req);
         console.log("response",response)
         return res.status(200).send({
             success:true,
-            message: 'Book deleted succefully',
-            Books: response
+            message: 'Issue deleted succefully',
+            Issue: response
         })
     }
     catch(error)
@@ -54,14 +54,14 @@ exports.deleteBook = async (req,res) => {
         errorHandler(res,error);
     }
 }
-exports.getBook = async (req,res) => {
+exports.getSingleIssue = async (req,res) => {
     try{
-        const response = await booksService.getBookById(req);
+        const response = await issueService.getIssueById(req);
         console.log("response",response)
         return res.status(200).send({
             success:true,
-            message: 'Book fetched succefully',
-            Books: response
+            message: 'Issue fetched succefully',
+            Issue: response
         })
     }
     catch(error)
@@ -71,14 +71,30 @@ exports.getBook = async (req,res) => {
         errorHandler(res,error);
     }
 }
-exports.editBook = async (req,res) => {
+exports.editIssue = async (req,res) => {
   try{
-      const response = await booksService.editBook(req);
+      const response = await issueService.editIssue(req);
       console.log("response",response)
       return res.status(200).send({
           success:true,
-          message: 'Book updated succefully',
-          Books: response
+          message: 'Issue updated successfully',
+          Issue: response
+      })
+  }
+  catch(error)
+  {
+      console.log('error: ', error);
+      errorHandler(res,error);
+  }
+}
+exports.acceptIssue = async (req,res) => {
+  try{
+      const response = await issueService.acceptIssue(req);
+      console.log("response",response)
+      return res.status(200).send({
+          success:true,
+          message: 'Issue updated successfully',
+          Issue: response
       })
   }
   catch(error)

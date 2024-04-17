@@ -3,6 +3,7 @@
     "sequelize-cli": "^6.6.2"
   },
   "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.37",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

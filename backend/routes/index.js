@@ -1,6 +1,7 @@
 const express = require('express');
 const userRoute = require('./user.routes.js');
 const bookRoute = require('./books.routes.js');
+const issueRoute = require('./issue.routes.js');
 
 // import examRoute from "./exam.routes.js"
 // import questionRoute from "./question.routes.js"
@@ -12,6 +13,7 @@ router.get("/", (req, res) => {
 
 router.use("/users", userRoute);
 router.use("/books", bookRoute);
-// router.use("/question",questionRoute)
+router.use("/issue", issueRoute);
+
 
 module.exports = router

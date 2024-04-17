@@ -9,5 +9,6 @@
 
 module.exports = {
     userController: require("./user.controller.js"),
-    bookController: require("./books.controller.js")
+    bookController: require("./books.controller.js"),
+    issueController: require("./issue.controller.js")
 }
