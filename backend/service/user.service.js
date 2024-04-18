@@ -96,7 +96,8 @@ exports.login = async (payload) => {
       });
     }
 
-    const token = JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
+    // console.log('id: user.id,userId:user.userId: ',user.id,user.userId);
+    const token = JWT.sign({ id: user.id,userId:user.userId }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
     

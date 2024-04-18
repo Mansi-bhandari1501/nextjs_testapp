@@ -1,1 +1,1 @@
-export { createExam } from "./exam.service";
+export { createExam } from "./book.service";

@@ -165,12 +165,7 @@ exports.acceptIssue = async (req) => {
     if (user.role === "admin") {
       // const Book = await Issue.findOne({bookId: req.params.id})
       if (issue) {
-        // Book.title = req.body.title;
-        // Book.author = req.body.author;
-        // Book.category = req.body.category;
-        // Book.descriptions = req.body.descriptions;
-        // Book.stock = req.body.stock;
-        // Book.save()
+        
         const updatedIssue = Issue.update(
           { status: "issued" },
           { where: { uuId: req.params.id } }
@@ -187,7 +182,7 @@ exports.acceptIssue = async (req) => {
     else {
       throw Object.assign(new Error(), {
         name: "BAD_REQUEST",
-        message: "Cannot update exam details",
+        message: "Cannot update issue details",
       });
     }
   }

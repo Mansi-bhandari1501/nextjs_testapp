@@ -1,11 +1,13 @@
-import JWT from "jsonwebtoken";
+const JWT = require("jsonwebtoken");
 
 //protected route
 
-export const requireSignIn = async (req, res, next) =>  {
+exports.requireSignIn = async (req, res, next) =>  {
   try {
     console.log("request reached to middleware")
       const token = req.header('Authorization');
+      console.log('token: ', token);
+      
       console.log( req.headers.Authorization)
       if (!token) {
           return res.status(401).json({ error: 'Unauthorized - Token not provided' });

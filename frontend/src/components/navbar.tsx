@@ -17,18 +17,18 @@ const TopBar = () => {
 
             <Stack direction={"row"} alignItems={"center"}>
             <HomeIcon/>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 ,ml:3}}>
-              SKILLSHORE 
+            <Typography variant="h5" component="div" sx={{ flexGrow: 1 ,ml:3,width:"200px"}}>
+             ShelfSpace
             </Typography>
 
             </Stack>
             <Stack direction={"row" } sx={{ml:5}} width={"100%"} gap={"20px"} >
-            <Link href="/adminDashboard"> <Typography sx={{color:"white"}}>Dashboard</Typography></Link>
-             <Link href="/addQuiz"> <Typography sx={{color:"white"}}>Add Quiz</Typography></Link>
+            <Link href="/dashboard"> <Typography sx={{color:"white"}}>Dashboard</Typography></Link>
+             <Link href="/addBooks"> <Typography sx={{color:"white"}}>Add Books</Typography></Link>
              <Link href="/addQuiz"> <Typography sx={{color:"white"}}>Report</Typography></Link>
             </Stack>
             <Stack direction={"row"} gap={"25px"} sx={{mr:2}}>
-                <Button variant="text"  sx={{bgcolor:"white",borderRadius:"10px",color:"#03103F",height:"50px" , '&:hover':{bgcolor:"white",borderRadius:"10px",color:"#03103F"}}}>Log Out</Button>
+                <Button variant="text"  sx={{bgcolor:"white",borderRadius:"10px",color:"#03103F",height:"50px",width:"100px" , '&:hover':{bgcolor:"white",borderRadius:"10px",color:"#03103F"}}}>Log Out</Button>
 
             </Stack>
             </Stack>

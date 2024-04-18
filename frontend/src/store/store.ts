@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import createWebStorage from "redux-persist/es/storage/createWebStorage";
 import authReducer from "../feature/auth/auth.slice"
+import booksReducer from "../feature/books/book.Slice"
 import { persistReducer } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
 //Noop storage function
@@ -29,6 +30,7 @@ const persistConfig = {
 };
 const rootReducer = combineReducers({
   auth:authReducer,
+  books:booksReducer,
   
  
 });

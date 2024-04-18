@@ -10,7 +10,7 @@ export const axiosApi =  axios.create({
 })
 
 const PATHS = {
-  addExam: "/exam/addExam",
+  addBooks: "/api/addBooks",
 };
 
-export const createExam = async (payload:any) => await axiosApi.post(PATHS.addExam, payload);
+export const createBook = async (payload:any) => await axiosApi.post(PATHS.addBooks, payload);

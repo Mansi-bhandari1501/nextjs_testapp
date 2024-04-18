@@ -2,18 +2,19 @@ const {User}= require("../models");
 const {Books}= require("../models");
 
 exports.addNewBook = async(req) => {
+  console.log("😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁",req.user)
     try{
-      console.log("Request",req.body)
-      const user = await User.findOne({
-        uuId: req.body.uuId
-      })
+      console.log("Request",req.body.data)
+      const user = await User.findOne({where:{
+        userId: req.user.userId
+      }})
       console.log('user: ', user);
       if(user.role === 'admin'){
 
-      const  {title,category,stock,descriptions,author} = req.body
+      const  {title,category,stock,descriptions,author} = req.body.data
       
          const bookExists = await Books.findOne({where:{title:title}})
-         console.log(bookExists,"jgsfusugufgsud")
+         console.log(bookExists,"jgsfusugufgsudGHJGHJGGJGJGJHHHDJTRHERSTVBRFEFRDDCGHYU7JH")
          if(bookExists){
           throw Object.assign(new Error(), {
             name: "CONFLICT",
@@ -28,12 +29,12 @@ exports.addNewBook = async(req) => {
          }
         }
     // return newBook;
-    }
-    catch(error){
-      // console.log(error)
-      throw(error)
-    }
- }
+  }
+  catch(error){
+    // console.log(error)
+    throw(error)
+  }}
+  
 exports.getAllBooks = async(req) => {
     try{
        const Book = await Books.findAll({})
