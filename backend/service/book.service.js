@@ -2,7 +2,7 @@ const {User}= require("../models");
 const {Books}= require("../models");
 
 exports.addNewBook = async(req) => {
-  console.log("😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁😁",req.user)
+  console.log("UserId",req.user)
     try{
       console.log("Request",req.body.data)
       const user = await User.findOne({where:{
@@ -78,7 +78,7 @@ exports.getAllBooks = async(req) => {
   // edit exam by id
   exports.editBook = async(req) => {
     try{
-       const user = await User.findOne({where:{userId: req.body.userid}})
+       const user = await User.findOne({where:{userId: req.user.userId}})
        if(user.role === "admin"){
         const Book = await Books.findOne({bookId: req.params.id})
         if(Book){
@@ -116,7 +116,8 @@ exports.getAllBooks = async(req) => {
   exports.deleteBook = async(req) => {
     try{
       console.log("params",req.params.id)
-       const user = await User.findOne({where:{userId: req.body.userId}})
+      console.log("user",req.user.userId)
+       const user = await User.findOne({where:{userId: req.user.userId}})
        if(user.role === "admin"){
         console.log("user is admin")
         const Book = await Books.findOne({where:{bookId: req.params.id}})

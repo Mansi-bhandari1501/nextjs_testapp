@@ -1,14 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { createBook } from "./book.Action";
+import { createBook, getAllBook,deleteBook } from "./book.Action";
 
 export interface book {
-  uuId?: string
+  id?:number
+  bookId?: string
   title?: string
   descriptions?: string
   category?: string
   stock?: string
   author?: string
-  
   // tag?: string
 }
 interface actionData{
@@ -57,6 +57,57 @@ const bookSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(createBook.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action;
+    });
+    builder.addCase(getAllBook.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getAllBook.fulfilled, (state, action) => {
+      state.loading = false;
+      // const data = payload.data.Books;
+      // state.books.push(data)
+      // console.log("jgjwgfuags",state.books)
+      // state.success = true;
+      // console.log(payload, "gerh4")
+      // console.log(payload.data.Books, "gerh4")
+      const data: object  = action?.payload?.data?.Books
+      console.log('useSlice data', data)
+      if (data !== undefined) {
+              state.books= data;
+            }
+            console.log( state.books)
+      state.loading = false;
+    });
+    builder.addCase(getAllBook.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action;
+    });
+
+
+    builder.addCase(deleteBook.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteBook.fulfilled, (state, action) => {
+      state.loading = false;
+      // const data = payload.data.Books;
+      // state.books.push(data)
+      // console.log("jgjwgfuags",state.books)
+      // state.success = true;
+      // console.log(payload, "gerh4")
+      // console.log(payload.data.Books, "gerh4")
+      const data: object  = action?.payload.data?.Books?.bookId
+      console.log('useSlice data', data)
+      // if (data !== undefined) {
+      //         state.books= data;
+      // { ...state, items: state.items.filter(i => i.id !== action.payload.id }
+      //       }
+            console.log( state.books)
+      state.loading = false;
+    });
+    builder.addCase(deleteBook.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action;
