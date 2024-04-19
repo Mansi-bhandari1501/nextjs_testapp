@@ -11,9 +11,9 @@ export interface book {
   author?: string
   // tag?: string
 }
-interface actionData{
-  data:book
-}
+// interface actionData{
+//   data:book
+// }
 type initialData = {
   loading: Boolean,
   error: any | undefined,
@@ -102,7 +102,7 @@ const bookSlice = createSlice({
       console.log('useSlice data', data)
       // if (data !== undefined) {
       //         state.books= data;
-      // { ...state, items: state.items.filter(i => i.id !== action.payload.id }
+      { ...state.books, items: state.books.filter(i => i.bookId !== data }
       //       }
             console.log( state.books)
       state.loading = false;
