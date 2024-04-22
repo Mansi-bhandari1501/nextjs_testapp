@@ -74,7 +74,7 @@ exports.getBook = async (req,res) => {
 exports.editBook = async (req,res) => {
   try{
       const response = await booksService.editBook(req);
-      console.log("response",response)
+    //   console.log("response",response)
       return res.status(200).send({
           success:true,
           message: 'Book updated succefully',

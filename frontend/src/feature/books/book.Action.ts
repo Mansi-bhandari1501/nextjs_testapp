@@ -41,7 +41,7 @@ ACTION_TYPE.GET_ALL_BOOK,
           Authorization: state.auth.userToken,
         },
       };
-     console.log(data)
+    //  console.log(data)
       const response = await axios.get("http://localhost:8080/books",config);
       console.log("message",response.data.Books)
       return response
@@ -63,6 +63,25 @@ ACTION_TYPE.DELETE_BOOK,
      console.log(bookId)
       const response = await axios.delete(`http://localhost:8080/books/${bookId}`,config);
       console.log("message",response.data.Books)
+      return response
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+export const editBook = createAsyncThunk(
+ACTION_TYPE.EDIT_BOOK,
+  async ( data:{ bookId:string,title:string,stock:string,category:string,author:string,descriptions:string}, {getState, rejectWithValue }) => {
+    try {
+      let state:any = getState();
+      const config = {
+        headers: {
+          Authorization: state.auth.userToken,
+        },
+      };
+     console.log(data)
+      const response = await axios.put(`http://localhost:8080/books/${data.bookId}`,{data},config);
+      console.log("message",response)
       return response
     } catch (error) {
       console.log(error);

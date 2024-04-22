@@ -75,24 +75,30 @@ exports.getAllBooks = async(req) => {
     }
   }
   
-  // edit exam by id
+  
   exports.editBook = async(req) => {
     try{
+      console.log("REQUEST BODY❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️",req.body)
        const user = await User.findOne({where:{userId: req.user.userId}})
        if(user.role === "admin"){
         const Book = await Books.findOne({bookId: req.params.id})
         if(Book){
-          // Book.title = req.body.title;
-          // Book.author = req.body.author;
-          // Book.category = req.body.category;
-          // Book.descriptions = req.body.descriptions;
-          // Book.stock = req.body.stock;
-          // Book.save()
-          const updatedBook = Books.update(
-            req.body ,
-            { where: { bookId: req.params.id } }
-          )
-         return Book
+          Book.title = req.body.data.title ;
+          Book.author = req.body.data.author;
+          Book.category = req.body.data.category ;
+          Book.descriptions = req.body.data.descriptions;
+          Book.stock = req.body.data.stock ;
+          await Book.save()
+          // const updatedBook = Books.update(
+          //  req.body.data,
+          //   { where: { bookId: req.params.id }
+         
+           
+          // }
+          // )
+          const editedBook = await Books.findOne({bookId: req.params.id})
+          console.log("UPDATED BOOK📔📔📔📔📔📔📔📕📕📕📕",editedBook)
+         return editedBook
         }
         else{
           throw Object.assign(new Error(), {

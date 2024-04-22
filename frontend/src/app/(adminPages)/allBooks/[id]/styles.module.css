@@ -72,6 +72,7 @@
   /* box-shadow: 5px 5px 0 0 var(--btn-color); */
   box-shadow: 3px 3px 3px 2px rgba(0,0,0,0.3);
   border-radius: 80px;
+  width:150px;
 }
 
 .btnSecondary {
@@ -109,7 +110,10 @@
   content: "\21E7";
   animation: float .5s ease-in-out infinite;
 }
-
+.btnGroup{
+  display: flex;
+  flex-wrap: wrap;
+}
 @keyframes float {
 	0% {
 		transform: translateX(-50%) translatey(0px);
@@ -120,6 +124,147 @@
 	100% {
 		transform: translateX(-50%) translatey(0px);
 	}
+}
+
+/* @media (max-width: 768px) {
+  .navContainer {
+    color: red;
+  }
+} */
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .cover{
+    width:100% ;
+  }
+  .img{
+    left:25%;
+    top:20%;
+    height:40%;
+    width:50%;
+  }
+  .title{
+    top:63%;
+    left:28%;
+    color:black;
+    font-size:50px !important;
+    font-weight:0;
+    /* color: black ; */
+  }
+  .about{
+    top:85%;
+    left:15%;
+    gap:10px;
+    margin-left:10px;
+  }
+  .btnGroup{
+    gap:15px !important;
+  }
+  .btn{
+    width:333px ;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px )and (max-device-width: 767px) {
+  .cover{
+    width:100% ;
+  }
+  .img{
+    left:25%;
+    top:30%;
+    height:40%;
+    width:50%;
+  }
+  .title{
+    top:73%;
+    left:68%;
+    color:black;
+    font-size:50px !important;
+    font-weight:0;
+    /* color: black ; */
+  }
+  .about{
+    top:75%;
+    left:5%;
+    gap:10px;
+    margin-left:10px;
+  }
+  .btn{
+    margin-left:10px;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-device-width: 992px){
+  .cover{
+    width:100%;
+  }
+  .img{
+    left:5%;
+    height:50%;
+    width:30%;
+  }
+  .title{
+    left:39%;
+    top:25%;
+    
+  }
+  .about{
+    left:39%;
+    gap:10px;
+    top:50%;
+  }
+  .btnGroup{
+    gap:5px ;
+  }
+  .btn{
+    width:100px ;
+    height:60px ;
+  }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .cover{
+    width:100%;
+  }
+  .img{
+    left:5%;
+  }
+  .title{
+    left:45%;
+    top:25%;
+  }
+  .about{
+    left:45%;
+    gap:10px;
+  }
+  .btnGroup{
+    gap:10px ;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .img{
+    position: absolute;
+    border: 1px solid black;
+    top: 200px;
+    left: 180px;
+    height:500px;
+    width: 350px;
+    box-shadow: 5px 5px 5px 2px rgba(0,0,0,0.3);
+}
+.title{
+    position: absolute;
+    /* border: 1px solid black; */
+    top: 200px;
+    left: 650px;
+    color:white;
+}
+.about{
+    position: absolute;
+    /* border: 1px solid black; */
+    top: 450px;
+    left: 650px;
+    color:black;
+}
 }
 /* 
 html, body {

@@ -1,5 +1,9 @@
+
+
+
+
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { createBook, getAllBook,deleteBook } from "./book.Action";
+import { createBook, getAllBook,deleteBook ,editBook} from "./book.Action";
 
 export interface book {
   id?:number
@@ -42,12 +46,7 @@ const bookSlice = createSlice({
     });
     builder.addCase(createBook.fulfilled, (state, action) => {
       state.loading = false;
-      // const data = payload.data.Books;
-      // state.books.push(data)
-      // console.log("jgjwgfuags",state.books)
-      // state.success = true;
-      // console.log(payload, "gerh4")
-      // console.log(payload.data.Books, "gerh4")
+    
       const data: object  = action?.payload?.data?.Books
       console.log('useSlice data', data)
       if (data !== undefined) {
@@ -66,18 +65,13 @@ const bookSlice = createSlice({
     });
     builder.addCase(getAllBook.fulfilled, (state, action) => {
       state.loading = false;
-      // const data = payload.data.Books;
-      // state.books.push(data)
-      // console.log("jgjwgfuags",state.books)
-      // state.success = true;
-      // console.log(payload, "gerh4")
-      // console.log(payload.data.Books, "gerh4")
+    
       const data: object  = action?.payload?.data?.Books
-      console.log('useSlice data', data)
+      // console.log('useSlice data', data)
       if (data !== undefined) {
               state.books= data;
             }
-            console.log( state.books)
+            // console.log( state.books)
       state.loading = false;
     });
     builder.addCase(getAllBook.rejected, (state, action) => {
@@ -92,48 +86,54 @@ const bookSlice = createSlice({
     });
     builder.addCase(deleteBook.fulfilled, (state, action) => {
       state.loading = false;
-      // const data = payload.data.Books;
-      // state.books.push(data)
-      // console.log("jgjwgfuags",state.books)
-      // state.success = true;
-      // console.log(payload, "gerh4")
-      // console.log(payload.data.Books, "gerh4")
       const data: object  = action?.payload.data?.Books?.bookId
       console.log('useSlice data', data)
-      // if (data !== undefined) {
-      //         state.books= data;
-      { ...state.books, items: state.books.filter(i => i.bookId !== data }
-      //       }
-            console.log( state.books)
-      state.loading = false;
+
+        const newBooks = state.books.filter((item) => {
+             return item.bookId !== data
+        })
+        state.books = newBooks
+        console.log("NEWREQQQ",newBooks)
+        console.log( state.books);
+        state.loading = false;
     });
     builder.addCase(deleteBook.rejected, (state, action) => {
       state.loading = false;
       state.success = false;
       state.error = action;
     });
-    //
-  
 
+    builder.addCase(editBook.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(editBook.fulfilled, (state, action) => {
+      // state.loading = false;
+      // const data: object  = action?.payload.data?.Books?.bookId
+      // console.log('useSlice data', data)
 
-    // builder.addCase(updateUser.pending, (state) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(updateUser.fulfilled, (state, action) => {
-    //   console.log("slice", action.payload.data.user);
-    //   state.loading = false;
-    //   state.success = true;
-    //   state.userInfo = action.payload.data.user;
-    // });
-    // builder.addCase(updateUser.rejected, (state, action) => {
-    //   state.loading = true;
-    //   state.success = false;
-    //   state.error = action.error.message;
-    // });
-
-
+      //   const newBooks = state.books.filter((item) => {
+      //        return item.bookId !== data
+      //   })
+      //   state.books = newBooks
+      //   console.log("NEWREQQQ",newBooks)
+      //   console.log( state.books);
+      //   state.loading = false;
+      // const { id, title, content } = action.payload
+      // const existingPost = state.find(post => post.id === id)
+      // if (existingPost) {
+      //   existingPost.title = title
+      //   existingPost.content = content
+      // }
+      console.log("EDITED DATA",action?.payload.data?.Books)
+    });
+    builder.addCase(editBook.rejected, (state, action) => {
+      state.loading = false;
+      state.success = false;
+      state.error = action;
+    });
+        }
 
   },
-});
+);
 
 export default bookSlice.reducer;
