@@ -37,6 +37,7 @@ const styless = {
 
 
 
+
 export default function Page({ params }: { params: { id: string } }) {
   console.log(params);
   const [open, setOpen] =useState(false);
@@ -76,7 +77,7 @@ export default function Page({ params }: { params: { id: string } }) {
        title, author, category, descriptions, stock
      }
      console.log(data,"data😁😁😁😁")
-     const res = await dispatch(editBook({bookId,title, author, category, descriptions, stock}))
+     const res = await dispatch(editBook({bookId,title, author , category, descriptions, stock}))
      setIsOpen(true)
  }catch(error){
    throw error;

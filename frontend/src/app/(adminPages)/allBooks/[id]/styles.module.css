@@ -186,10 +186,10 @@
     top:75%;
     left:5%;
     gap:10px;
-    margin-left:10px;
+    /* margin-left:5px; */
   }
   .btn{
-    margin-left:10px;
+    margin-left:0px !important;
   }
 }
 /* Medium devices (landscape tablets, 768px and up) */
